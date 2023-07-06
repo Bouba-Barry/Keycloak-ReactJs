@@ -22,26 +22,30 @@ const AppContent = () => {
     },[]);
     // ...
 
-    useEffect(() => {
-      
-        getUser().then(us => {
-          console.log("user: "+us);
-          if (us) {
-            toast.success('User has been successfully loaded from store.');
-            setIsLoggedIn(true);
-            setUser(us);
-          } else {
-            toast.info('You are not logged in.');
-            setIsLoggedIn(false);
-          }
-        
-        });
-        return () => {
-          // Clean up code
-          // Will be called when the component unmounts
-          // Set shouldCancel to true to cancel any ongoing asynchronous tasks
-          setShouldCancel(true);
-        };
+     useEffect(() => {
+    let isMounted = true;
+  
+    getUser().then(user => {
+      if (user) {
+        toast.success('User has been successfully loaded from store.');
+        setIsLoggedIn(true);
+      } else {
+        toast.info('You are not logged in.');
+        setIsLoggedIn(false);
+      }
+  
+      if (isMounted && !shouldCancel) {
+        setUser(user);
+      }
+    });
+  
+    return () => {
+      // Clean up code
+      // Will be called when the component unmounts
+      // Set shouldCancel to true to cancel any ongoing asynchronous tasks
+      setShouldCancel(true);
+      isMounted = false;
+    };
   }, [shouldCancel]);
   
   // ...
@@ -74,7 +78,7 @@ const AppContent = () => {
             <li>
               <Link
                 onClick={() => {setCurrentPage("/logout")}}
-                className={currentPage==='/logout'?'btn btn-info ms-1':'ms-1 btn btn-outline-primary'}
+                className={currentPage==='/logout'?'btn btn-info ms-1 p-1':'ms-1 p-1 btn btn-outline-primary'}
                 to={"/logout"}
               >
                 Logout

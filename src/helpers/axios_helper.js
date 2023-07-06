@@ -14,8 +14,10 @@ const _callApi = (token) => {
 
 export const callApi = async () => {
     const user = await getUser();
+    console.log("user_deb : "+user);
+
     if (user && user.access_token) {
-        console.log("access Token => "+user.access_token);
+        console.log("user_deb_access Token => "+user.access_token);
         return _callApi(user.access_token).catch(error => {
             throw error;
         });
