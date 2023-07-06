@@ -5,6 +5,7 @@ on utilisera le token donnée par keycloak pour vérifier l'accès de l'utilisat
 
 # Prérequis:
 1. Ajouter un client au même territoire(keycloak realm)  que notre backend .
+   
    ![image](https://github.com/Bouba-Barry/Keycloak-ReactJs/assets/96130733/e13fe651-972e-44b0-b5e5-f880a629f16d)
 
 ![image](https://github.com/Bouba-Barry/Keycloak-ReactJs/assets/96130733/a675909e-c2b1-44ea-a493-9b27cb092c92)
